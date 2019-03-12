@@ -15,7 +15,8 @@ def process_messages(data):
             voice_content = bot.get_voice_content(file_path)
             mp3_content = convert(voice_content)
             text = recognize(mp3_content)
-            print(text)
+            chat_id = message["message"]["chat"]["id"]
+            bot.send_message(chat_id, text)
 
 bot_config = {
     "api_token": "",

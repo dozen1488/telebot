@@ -48,3 +48,11 @@ class Bot:
     def get_voice_content(self, file_path):
         response = requests.get(TELEGRAM_URL + "/file/bot" + self.api_token + "/" + file_path)
         return response.content
+
+    def send_message(self, chat_id, message):
+        params = {
+            "chat_id": chat_id,
+            "text": message
+        }
+        response = requests.get(TELEGRAM_URL + "/bot" + self.api_token + "/sendMessage", data=params)
+        return response
