@@ -1,31 +1,26 @@
 import requests
+import subprocess
+import sys
+
 from threading import Timer
+from modules.bot_module import Bot
+from modules.speech_recognition import recognize
+from modules.convert_ogg_module import convert
 
-api_token = None
-url = "https://api.telegram.org/bot%s/" % api_token
-latest_update_id = 0
+def process_messages(data):
+    messages = data["result"]
+    for message in messages:
+        if message["message"]["voice"]:
+            file_path = bot.get_file_path(message["message"]["voice"]["file_id"])
+            voice_content = bot.get_voice_content(file_path)
+            mp3_content = convert(voice_content)
+            text = recognize(mp3_content)
+            print(text)
 
-def get_updates_json(url, latest_update_id):  
-    params = {
-        'timeout': 1000,
-        'offset': latest_update_id + 1
-    }
-    response = requests.get(url + 'getUpdates', data=params)
-    return response.json()
+bot_config = {
+    "api_token": "",
+    "update_callback": process_messages
+}
+bot = Bot(bot_config)
 
-def last_update(data):  
-    results = data['result']
-    total_updates = len(results) - 1
-    return results[total_updates]
-
-def printUpdates():
-    global latest_update_id
-    updates = get_updates_json(url, latest_update_id)['result']
-    latest_update_id = updates[-1]['update_id'] if updates else latest_update_id
-    print(updates)
-    global timer
-    timer = Timer(5.0, printUpdates)
-    timer.start()
-
-timer = Timer(5.0, printUpdates)
-timer.start()
+bot.start_listening()

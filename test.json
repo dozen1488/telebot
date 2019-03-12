@@ -1,0 +1,33 @@
+{
+    "ok": True,
+    "result": [
+        {
+            "update_id": 782485229,
+            "message": {
+                "message_id": 15,
+                "from": {
+                    "id": 396764685,
+                    "is_bot": False,
+                    "first_name": "Роговичка",
+                    "last_name": "Прекрасная",
+                    "username": "DragMetal",
+                    "language_code": "en"
+                },
+                "chat": {
+                    "id": 396764685,
+                    "first_name": "Роговичка",
+                    "last_name": "Прекрасная",
+                    "username": "DragMetal",
+                    "type": "private"
+                },
+                "date": 1552380787,
+                "voice": {
+                    "duration": 1,
+                    "mime_type": "audio/ogg",
+                    "file_id": "AwADAgADbAIAAoEBOUhLpdx83EmqYgI",
+                    "file_size": 7638
+                }
+            }
+        }
+    ]
+}
