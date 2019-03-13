@@ -1,15 +1,11 @@
-import requests
-import subprocess
-import sys
+import asyncio
 
-from threading import Timer
-from modules.speech_to_text_bot import SpeechToTextBot
-from modules.speech_recognition import recognize
-from modules.convert_ogg_module import convert
+from modules.speech_to_text_bot import *
 
 bot_config = {
     "api_token": ""
 }
 bot = SpeechToTextBot(bot_config)
 
-bot.start_listening()
+loop = asyncio.get_event_loop()
+loop.run_until_complete(bot.start_listening())
