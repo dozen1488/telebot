@@ -8,7 +8,9 @@ from modules.speech_to_text_bot import *
 print('App starting')
 
 if "PORT" in os.environ:
-    socket = socket.socket().bind(('0.0.0.0', int(os.environ["PORT"]))).listen(1) # For heroku
+    socket = socket.socket()
+    socket.bind(('0.0.0.0', int(os.environ["PORT"])))
+    socket.listen(1) # For heroku
     print('App bind port')
 
 bot_config = {
