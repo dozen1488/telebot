@@ -21,7 +21,7 @@ class SpeechToTextBot(TelegramBot):
 
                 chat_id = message["message"]["chat"]["id"]
                 await self.interactor.send_message(chat_id, text)
-                print('Processed a message ' + str(time.time()))
+                print('Processed a message at ' + str(time.time()))
         except BaseException as error:
             print(error)
             chat_id = message["message"]["chat"]["id"]
@@ -32,6 +32,6 @@ class SpeechToTextBot(TelegramBot):
     def process_updates(self, data):
         messages = data["result"]
         if messages:
-            print('Got a request ' + str(time.time()))
+            print('Got a request at ' + str(time.time()))
         for message in messages:
             asyncio.create_task(self.process_message(message))
