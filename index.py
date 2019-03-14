@@ -12,4 +12,8 @@ bot = SpeechToTextBot(bot_config)
 loop = asyncio.get_event_loop()
 loop.run_until_complete(bot.start_listening())
 
-socket = socket.socket().bind('', os.environ["PORT"]).listen(1) if "PORT" in os.environ else None
+try:
+    print(os.environ["PORT"])
+except:
+    pass
+socket = socket.socket().bind('', os.environ["PORT"]) if "PORT" in os.environ else None
