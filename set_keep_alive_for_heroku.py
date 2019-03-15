@@ -1,6 +1,6 @@
 import os
-import ping3 
 import time
+import urllib.request
 
 from socket import socket 
 from threading import Timer, Thread, Event
@@ -13,7 +13,7 @@ def _bind_port():
 
 def _ping_google():
     def ping():
-        ping3.ping('google.com')
+        contents = urllib.request.urlopen("http://google.com").read()
 
     while True:
         ping()
