@@ -1,17 +1,11 @@
 import asyncio
 import os
-import socket 
-import threading
+from set_keep_alive_for_heroku import set_keep_alive_for_heroku
 
 from modules.speech_to_text_bot import *
 
 print('App starting')
-
-if "PORT" in os.environ:
-    socket = socket.socket()
-    socket.bind(('0.0.0.0', int(os.environ["PORT"])))
-    socket.listen(1) # For heroku
-    print('App bind port')
+set_keep_alive_for_heroku()
 
 bot_config = {
     "api_token": os.environ["TELRGRAM_API_TOKEN"]
