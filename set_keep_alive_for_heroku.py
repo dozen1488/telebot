@@ -1,13 +1,13 @@
 import os
 import time
 import urllib.request
+import socket 
 
-from socket import socket 
 from threading import Timer, Thread, Event
 
-def _bind_port():
-    env_socket = socket()
-    env_socket.bind(('0.0.0.0', int(os.environ["PORT"])))
+def bind_port():
+    env_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    env_socket.bind(('', int(os.environ["PORT"])))
     env_socket.listen(1)
     print('App bind port')
 
@@ -25,5 +25,4 @@ def _set_reccuring_ping():
 
 def set_keep_alive_for_heroku():
     if "PORT" in os.environ:
-        _bind_port()
         _set_reccuring_ping()
