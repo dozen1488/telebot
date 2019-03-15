@@ -1,5 +1,7 @@
 import os
+import ping3 
 import time
+
 from socket import socket 
 from threading import Timer, Thread, Event
 
@@ -11,7 +13,7 @@ def _bind_port():
 
 def _ping_google():
     def ping():
-        os.system("ping -n 1 google.com")
+        ping3.ping('google.com')
 
     while True:
         ping()
