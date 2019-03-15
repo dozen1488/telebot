@@ -26,4 +26,4 @@ def _set_reccuring_ping():
 def set_keep_alive_for_heroku():
     if "PORT" in os.environ:
         _bind_port()
-        _ping_google()
+        _set_reccuring_ping()
