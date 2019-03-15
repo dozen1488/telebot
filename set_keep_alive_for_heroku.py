@@ -1,12 +1,12 @@
 import os
-import socket 
 import time
+from socket import socket 
 from threading import Timer, Thread, Event
 
 def _bind_port():
-    socket = socket.socket()
-    socket.bind(('0.0.0.0', int(os.environ["PORT"])))
-    socket.listen(1)
+    env_socket = socket()
+    env_socket.bind(('0.0.0.0', int(os.environ["PORT"])))
+    env_socket.listen(1)
     print('App bind port')
 
 def _ping_google():
