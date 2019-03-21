@@ -9,7 +9,7 @@ def bind_port():
     env_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     env_socket.bind(('', int(os.environ["PORT"])))
     env_socket.listen(1)
-    print('App bind port')
+    print('App bind port ' + os.environ["PORT"])
 
 def _ping_google():
     def ping():
