@@ -1,5 +1,4 @@
 import requests
-import asyncio
 import functools
 
 from helpers import asyncronize_function
@@ -10,7 +9,6 @@ TELEGRAM_URL = "https://api.telegram.org"
 class TelegramInteractor: 
     def __init__(self, api_token):
         self.api_token = api_token
-        self.loop = asyncio.get_event_loop()
 
     async def get_file_path(self, file_id):
         try:
