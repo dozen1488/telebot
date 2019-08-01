@@ -8,11 +8,11 @@ from helpers import asyncronize_function
 converter_path = None
 
 if "Windows" in platform.architecture()[1]:
-    converter_path = "./ffmpeg.exe"
+    converter_path = "./static_files/ffmpeg.exe"
 else:
-    converter_path = "./ffmpeg"
-    st = os.stat("./ffmpeg")
-    os.chmod("./ffmpeg", st.st_mode | stat.S_IEXEC)
+    converter_path = "./static_files/ffmpeg"
+    st = os.stat("./static_files/ffmpeg")
+    os.chmod("./static_files/ffmpeg", st.st_mode | stat.S_IEXEC)
 
 async def convert(voice_ogg_content):
     completedProcess = await asyncronize_function(

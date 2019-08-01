@@ -26,3 +26,4 @@ class TelegramBot:
 
     def stop_listening(self):
         self.listening = False
+        

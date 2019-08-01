@@ -2,13 +2,15 @@ import requests
 import functools
 
 from helpers import asyncronize_function
-from errors.errors import GetFilePathError, GetVoiceContentError, GetUpdatesJsonError, SendMessageError
+from errors.errors import GetFilePathError, GetVoiceContentError, GetUpdatesJsonError, SendMessageError, WebhookError
 
 TELEGRAM_URL = "https://api.telegram.org"
 
 class TelegramInteractor: 
     def __init__(self, api_token):
         self.api_token = api_token
+        self.hook_url = hook_url 
+        self.certificate_path = certificate_path 
 
     async def get_file_path(self, file_id):
         try:
@@ -64,3 +66,32 @@ class TelegramInteractor:
             return response.json()
         except BaseException:
             raise GetUpdatesJsonError()
+
+    async def create_webhook(self):
+        try:
+            if 'hook_url' in self and 'certificate_path' in self
+                with open(self.certificate_path) as certificate
+                    params = {
+                        "url": self.hook_url,
+                        "certificate": certificate
+                    }
+                    response = await asyncronize_function(
+                        requests.post,
+                        TELEGRAM_URL + "/bot" + self.api_token + "/setWebhook",
+                        data=params
+                    )
+                    return response.json()
+            else
+                return NULL
+        except BaseException:
+            raise WebhookError()
+
+    async def delete_webhook(self):
+        try:
+            response = await asyncronize_function(
+                requests.get,
+                TELEGRAM_URL + "/bot" + self.api_token + "/deleteWebHook"
+            )
+            return response.json()
+        except BaseException:
+            raise WebhookError()

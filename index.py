@@ -5,8 +5,6 @@ from set_keep_alive_for_heroku import set_keep_alive_for_heroku, bind_port
 from modules.speech_to_text_bot import *
 
 print('App starting')
-bind_port()
-set_keep_alive_for_heroku()
 
 bot_config = {
     "api_token": os.environ["TELRGRAM_API_TOKEN"]
