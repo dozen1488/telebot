@@ -6,9 +6,10 @@ from .speech_recognition import recognize
 from .telegram_hook_bot import TelegramHookBot
 
 class SpeechToTextBot(TelegramHookBot):
-    def __init__(self, *params):
-        TelegramHookBot.__init__(self, *params)
+    def __init__(self, bot_config, converter_path):
+        TelegramHookBot.__init__(self, bot_config)
         self.update_callback = self.process_updates
+        self.converter_path = converter_path
     
     async def process_message(self, message):
         try: 
@@ -16,7 +17,7 @@ class SpeechToTextBot(TelegramHookBot):
                 file_path = await self.interactor.get_file_path(message["message"]["voice"]["file_id"])
                 voice_content = await self.interactor.get_voice_content(file_path)
 
-                mp3_content = await convert(voice_content)
+                mp3_content = await convert(voice_content, self.converter_path)
                 text = await recognize(mp3_content)
 
                 chat_id = message["message"]["chat"]["id"]
