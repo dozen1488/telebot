@@ -3,11 +3,11 @@ import time
 
 from .convert_ogg_module import convert
 from .speech_recognition import recognize
-from .telegram_bot import TelegramBot
+from .telegram_hook_bot import TelegramHookBot
 
-class SpeechToTextBot(TelegramBot):
+class SpeechToTextBot(TelegramHookBot):
     def __init__(self, *params):
-        TelegramBot.__init__(self, *params)
+        TelegramHookBot.__init__(self, *params)
         self.update_callback = self.process_updates
     
     async def process_message(self, message):
@@ -29,9 +29,9 @@ class SpeechToTextBot(TelegramBot):
 
             await self.interactor.send_message(chat_id, text)
 
-    def process_updates(self, data):
+    async def process_updates(self, data):
         messages = data["result"]
         if messages:
             print('Got a request at ' + str(time.time()))
         for message in messages:
-            asyncio.create_task(self.process_message(message))
+            await self.process_message(message)

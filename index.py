@@ -13,4 +13,4 @@ bot_config = {
 bot = SpeechToTextBot(bot_config)
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(bot.start_listening())
+loop.run_until_complete(bot.update_state())

@@ -7,7 +7,7 @@ from errors.errors import GetFilePathError, GetVoiceContentError, GetUpdatesJson
 TELEGRAM_URL = "https://api.telegram.org"
 
 class TelegramInteractor: 
-    def __init__(self, api_token):
+    def __init__(self, api_token, hook_url=None, certificate_path=None):
         self.api_token = api_token
         self.hook_url = hook_url 
         self.certificate_path = certificate_path 
@@ -69,8 +69,8 @@ class TelegramInteractor:
 
     async def create_webhook(self):
         try:
-            if 'hook_url' in self and 'certificate_path' in self
-                with open(self.certificate_path) as certificate
+            if hasattr(self, 'hook_url') and hasattr(self, 'certificate_path'):
+                with open(self.certificate_path) as certificate:
                     params = {
                         "url": self.hook_url,
                         "certificate": certificate
@@ -81,8 +81,8 @@ class TelegramInteractor:
                         data=params
                     )
                     return response.json()
-            else
-                return NULL
+            else:
+                return None
         except BaseException:
             raise WebhookError()
 
